@@ -1,138 +1,896 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Daily News</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
-      color: #333;
-    }
-    header {
-      background: #222;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-    }
-    nav {
-      background: #444;
-      padding: 0.5rem;
-      text-align: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .container {
-      width: 90%;
-      max-width: 1000px;
-      margin: 20px auto;
-    }
-    .news {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: scale(1.02);
-    }
-    .card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .card h3 {
-      margin: 15px;
-      font-size: 1.2rem;
-    }
-    .card p {
-      margin: 0 15px 15px;
-      font-size: 0.95rem;
-      color: #555;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: #222;
-      color: #fff;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: none;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu.active {
+            display: flex;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.98);
+            flex-direction: column;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #22c55e;
+        }
+
+        .search-container {
+            display: none;
+            position: relative;
+            margin: 0 2rem;
+            flex: 1;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .cart-icon {
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #22c55e;
+        }
+
+        /* Main Content */
+        .main {
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Mobile Search */
+        .mobile-search {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .mobile-search .search-bar {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .mobile-search .search-icon {
+            left: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: left;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .explore-btn {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Category Filters */
+        .category-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: white;
+            border-color: #22c55e;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .art-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .art-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .art-image {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .art-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .art-card:hover .art-image img {
+            transform: scale(1.05);
+        }
+
+        .wishlist-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .wishlist-btn:hover,
+        .wishlist-btn.active {
+            color: #ef4444;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .old-price {
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .new-price {
+            color: #22c55e;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+        }
+
+        .close-btn {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .modal-info {
+            padding: 2rem;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .modal-description {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .modal-price .old-price {
+            font-size: 1.1rem;
+        }
+
+        .modal-price .new-price {
+            font-size: 1.5rem;
+        }
+
+        .size-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .size-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .scan-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .scan-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .add-cart-btn {
+            background: linear-gradient(45deg, #22c55e, #16a34a);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+            flex: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .header {
+                padding: 1rem 3rem;
+            }
+
+            .hamburger {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex;
+                position: static;
+                flex-direction: row;
+                background: none;
+                padding: 0;
+                width: auto;
+            }
+
+            .search-container {
+                display: block;
+                max-width: 400px;
+            }
+
+            .mobile-search {
+                display: none;
+            }
+
+            .main {
+                margin-top: 100px;
+                padding: 3rem;
+            }
+
+            .hero {
+                text-align: center;
+                padding: 4rem 0;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .art-image {
+                height: 250px;
+            }
+
+            .modal-content {
+                max-width: 800px;
+                display: flex;
+                flex-direction: row;
+            }
+
+            .modal-image {
+                width: 50%;
+                height: 500px;
+                border-radius: 20px 0 0 20px;
+            }
+
+            .modal-info {
+                width: 50%;
+                padding: 3rem;
+            }
+
+            .modal-actions {
+                flex-wrap: nowrap;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .art-image {
+                height: 280px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(34, 197, 94, 0.6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(34, 197, 94, 0.8);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>📰 Daily News</h1>
-  </header>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">ArtLux</div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#artists">Artists</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
 
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">World</a>
-    <a href="#">Tech</a>
-    <a href="#">Sports</a>
-  </nav>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Find your Art">
+            </div>
 
-  <div class="container">
-    <h2>Latest Articles</h2>
-    <div class="news" id="news-container">
-      <!-- News articles will be inserted here by JavaScript -->
+            <div class="nav-right">
+                <i class="fas fa-shopping-cart cart-icon"></i>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="mobile-search">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-bar" placeholder="Find your Art">
+        </div>
+
+        <section class="hero">
+            <h1>A Brush for Your Luxury</h1>
+            <p>Explore unique collection of artwork</p>
+            <button class="explore-btn">
+                Explore <i class="fas fa-arrow-right"></i>
+            </button>
+        </section>
+
+        <div class="category-filters">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="nature">Nature</button>
+            <button class="category-btn" data-category="nfts">NFTs</button>
+            <button class="category-btn" data-category="art-smash">Art Smash</button>
+        </div>
+
+        <div class="gallery" id="gallery">
+            <!-- Art cards will be dynamically generated here -->
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-btn">&times;</button>
+            </div>
+            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-info">
+                <h2 class="modal-title" id="modal-title"></h2>
+                <p class="modal-description" id="modal-description"></p>
+                <div class="modal-price">
+                    <span class="old-price" id="modal-old-price"></span>
+                    <span class="new-price" id="modal-new-price"></span>
+                </div>
+                <div class="size-info">
+                    <div class="size-item">
+                        <span>Height</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span id="modal-height"></span>
+                    </div>
+                    <div class="size-item">
+                        <span>Width</span>
+                        <i class="fas fa-arrow-right"></i>
+                        <span id="modal-width"></span>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button class="scan-btn">
+                        <i class="fas fa-qrcode"></i>
+                        Scan My Place
+                    </button>
+                    <button class="add-cart-btn">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <p>© 2025 Daily News | Powered by GitHub Actions CI/CD</p>
-  </footer>
+    <script>
+        // Sample art data
+        const artworks = [
+            {
+                id: 1,
+                title: "Vintage Landscape",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+                oldPrice: "$250.00",
+                newPrice: "$150.00",
+                category: "nature",
+                description: "A home can never look complete without some vintage art prints adorning your wall.",
+                height: "100 cm",
+                width: "70 cm"
+            },
+            {
+                id: 2,
+                title: "Sylvia Christiansen",
+                image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop",
+                oldPrice: "$130.00",
+                newPrice: "$100.00",
+                category: "art-smash",
+                description: "Contemporary portrait art that captures the essence of modern expression.",
+                height: "80 cm",
+                width: "60 cm"
+            },
+            {
+                id: 3,
+                title: "Christopher Seahan",
+                image: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
+                oldPrice: "$220.00",
+                newPrice: "$170.00",
+                category: "nature",
+                description: "Classic portrait photography with timeless appeal and sophisticated composition.",
+                height: "90 cm",
+                width: "65 cm"
+            },
+            {
+                id: 4,
+                title: "Flower Poetry",
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+                oldPrice: "$300.00",
+                newPrice: "$230.00",
+                category: "nature",
+                description: "Beautiful floral arrangement that brings nature's poetry into your living space.",
+                height: "75 cm",
+                width: "55 cm"
+            },
+            {
+                id: 5,
+                title: "Digital Dreams",
+                image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop",
+                oldPrice: "$180.00",
+                newPrice: "$120.00",
+                category: "nfts",
+                description: "Cutting-edge digital art that represents the future of creative expression.",
+                height: "Digital",
+                width: "Format"
+            },
+            {
+                id: 6,
+                title: "Abstract Harmony",
+                image: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
+                oldPrice: "$350.00",
+                newPrice: "$280.00",
+                category: "art-smash",
+                description: "Modern abstract piece that creates harmony and balance in any room.",
+                height: "120 cm",
+                width: "85 cm"
+            }
+        ];
 
-  <script>
-    const articles = [
-      {
-        title: "AI Revolution in 2025",
-        description: "Artificial Intelligence is changing industries faster than ever before.",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaiqQckSDIs1ctz0tbeil3ByXlt4DAak2IHQ&s"
-      },
-      {
-        title: "SpaceX Launch Successful",
-        description: "SpaceX has launched another batch of satellites into orbit.",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaiqQckSDIs1ctz0tbeil3ByXlt4DAak2IHQ&s"
-      },
-      {
-        title: "New Tech Gadgets Released",
-        description: "Companies unveiled their latest smartphones and gadgets this week.",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaiqQckSDIs1ctz0tbeil3ByXlt4DAak2IHQ&s"
-      },
-      {
-        title: "Sports Championship 2025",
-        description: "The national team secured a victory in the grand finals.",
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaiqQckSDIs1ctz0tbeil3ByXlt4DAak2IHQ&s"
-      }
-    ];
+        let currentFilter = 'all';
+        let wishlistedItems = new Set();
 
-    const container = document.getElementById("news-container");
+        // DOM Elements
+        const gallery = document.getElementById('gallery');
+        const modal = document.getElementById('modal');
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const closeBtn = document.querySelector('.close-btn');
 
-    articles.forEach(article => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="${article.image}" alt="${article.title}">
-        <h3>${article.title}</h3>
-        <p>${article.description}</p>
-      `;
-      container.appendChild(card);
-    });
-  </script>
+        // Initialize
+        function init() {
+            renderGallery();
+            setupEventListeners();
+        }
+
+        // Render gallery
+        function renderGallery() {
+            const filteredArtworks = currentFilter === 'all' 
+                ? artworks 
+                : artworks.filter(art => art.category === currentFilter);
+
+            gallery.innerHTML = filteredArtworks.map(art => `
+                <div class="art-card" data-id="${art.id}">
+                    <div class="art-image">
+                        <img src="${art.image}" alt="${art.title}">
+                        <button class="wishlist-btn ${wishlistedItems.has(art.id) ? 'active' : ''}" data-id="${art.id}">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${art.title}</h3>
+                        <div class="price-container">
+                            <span class="old-price">${art.oldPrice}</span>
+                            <span class="new-price">${art.newPrice}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Hamburger menu
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Category filters
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.category;
+                    renderGallery();
+                });
+            });
+
+            // Gallery clicks
+            gallery.addEventListener('click', (e) => {
+                const card = e.target.closest('.art-card');
+                const wishlistBtn = e.target.closest('.wishlist-btn');
+                
+                if (wishlistBtn) {
+                    e.stopPropagation();
+                    const artId = parseInt(wishlistBtn.dataset.id);
+                    toggleWishlist(artId);
+                } else if (card) {
+                    const artId = parseInt(card.dataset.id);
+                    openModal(artId);
+                }
+            });
+
+            // Modal close
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // ESC key to close modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeModal();
+            });
+        }
+
+        // Toggle wishlist
+        function toggleWishlist(artId) {
+            if (wishlistedItems.has(artId)) {
+                wishlistedItems.delete(artId);
+            } else {
+                wishlistedItems.add(artId);
+            }
+            renderGallery();
+        }
+
+        // Open modal
+        function openModal(artId) {
+            const artwork = artworks.find(art => art.id === artId);
+            if (!artwork) return;
+
+            document.getElementById('modal-image').src = artwork.image;
+            document.getElementById('modal-title').textContent = artwork.title;
+            document.getElementById('modal-description').textContent = artwork.description;
+            document.getElementById('modal-old-price').textContent = artwork.oldPrice;
+            document.getElementById('modal-new-price').textContent = artwork.newPrice;
+            document.getElementById('modal-height').textContent = artwork.height;
+            document.getElementById('modal-width').textContent = artwork.width;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize app
+        init();
+    </script>
 </body>
 </html>
