@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Art Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Nova - Collections of Art</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +17,7 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: black;
             color: white;
             line-height: 1.6;
             overflow-x: hidden;
@@ -44,7 +46,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #22c55e, #16a34a);
+            background: rgb(102, 0, 255);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -75,7 +77,7 @@
         }
 
         .nav-menu a:hover {
-            color: #22c55e;
+            color: rgb(102, 0, 255);
         }
 
         .search-container {
@@ -180,10 +182,17 @@
 
         /* Hero Section */
         .hero {
+            display: flex;
+            flex-direction: column;
+            /* stack text & buttons vertically */
+            align-items: flex-start;
+            /* align everything to the right */
             text-align: left;
+            /* align text inside elements */
             margin-bottom: 3rem;
             padding: 2rem 0;
         }
+
 
         .hero h1 {
             font-size: 2.5rem;
@@ -196,28 +205,13 @@
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 2rem;
+            text-align: left;
+            align-items: flex-start;
         }
 
-        .explore-btn {
-            background: linear-gradient(45deg, #22c55e, #16a34a);
-            color: white;
-            padding: 1rem 3rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+     
 
-        .explore-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
-        }
-
+       
         /* Category Filters */
         .category-filters {
             display: flex;
@@ -232,7 +226,7 @@
             color: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(255, 255, 255, 0.2);
             padding: 0.5rem 1.5rem;
-            border-radius: 20px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s;
             white-space: nowrap;
@@ -241,9 +235,9 @@
 
         .category-btn.active,
         .category-btn:hover {
-            background: linear-gradient(45deg, #22c55e, #16a34a);
+            background: rgb(102, 0, 255);
             color: white;
-            border-color: #22c55e;
+            border: none;
         }
 
         /* Gallery Grid */
@@ -334,7 +328,7 @@
         }
 
         .new-price {
-            color: #22c55e;
+            color: white;
             font-weight: 600;
             font-size: 1.1rem;
         }
@@ -360,8 +354,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .modal-content {
@@ -376,8 +375,15 @@
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .modal-header {
@@ -482,7 +488,7 @@
         }
 
         .add-cart-btn {
-            background: linear-gradient(45deg, #22c55e, #16a34a);
+            background: rgb(102, 0, 255);
             color: white;
             border: none;
             padding: 0.75rem 2rem;
@@ -589,6 +595,8 @@
         /* Scrollbar Styling */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 2px;
+            
         }
 
         ::-webkit-scrollbar-track {
@@ -596,8 +604,10 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(34, 197, 94, 0.6);
+            background: rgb(115, 22, 255);
             border-radius: 4px;
+            
+
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -605,11 +615,12 @@
         }
     </style>
 </head>
+
 <body>
     <header class="header">
         <nav class="navbar">
-            <div class="logo">ArtLux</div>
-            
+            <div class="logo">Nova</div>
+
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#gallery">Gallery</a></li>
@@ -640,10 +651,8 @@
         </div>
 
         <section class="hero">
-            <h1>A Brush for Your Luxury</h1>
-            <p>Explore unique collection of artwork</p>
-            <button class="explore-btn">
-                Explore <i class="fas fa-arrow-right"></i>
+            <h1>Canvas of Exclusivity</h1>
+            <p>Step into a world where colors speak, forms inspire, and every stroke transforms your space into a living masterpiece. Each artwork is a journey—an echo of imagination, a whisper of emotion, turning walls into stories, and rooms into realms of wonder.</p>
             </button>
         </section>
 
@@ -703,8 +712,8 @@
         const artworks = [
             {
                 id: 1,
-                title: "Vintage Landscape",
-                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+                title: "The School of Athens",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7l8eWLDhE46jpomew5AzPWE9TFnfr1HiYQ&s",
                 oldPrice: "$250.00",
                 newPrice: "$150.00",
                 category: "nature",
@@ -715,7 +724,7 @@
             {
                 id: 2,
                 title: "Sylvia Christiansen",
-                image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg/960px-The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg",
                 oldPrice: "$130.00",
                 newPrice: "$100.00",
                 category: "art-smash",
@@ -726,7 +735,7 @@
             {
                 id: 3,
                 title: "Christopher Seahan",
-                image: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
+                image: "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/330px-PicassoGuernica.jpg",
                 oldPrice: "$220.00",
                 newPrice: "$170.00",
                 category: "nature",
@@ -737,7 +746,7 @@
             {
                 id: 4,
                 title: "Flower Poetry",
-                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/330px-1665_Girl_with_a_Pearl_Earring.jpg",
                 oldPrice: "$300.00",
                 newPrice: "$230.00",
                 category: "nature",
@@ -748,7 +757,7 @@
             {
                 id: 5,
                 title: "Digital Dreams",
-                image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=300&fit=crop",
+                image: "https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg?w=400&h=300&c=crop",
                 oldPrice: "$180.00",
                 newPrice: "$120.00",
                 category: "nfts",
@@ -759,7 +768,44 @@
             {
                 id: 6,
                 title: "Abstract Harmony",
-                image: "https://images.unsplash.com/photo-1578321272176-b7bbc0679853?w=400&h=300&fit=crop",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
+                oldPrice: "$350.00",
+                newPrice: "$280.00",
+                category: "art-smash",
+                description: "Modern abstract piece that creates harmony and balance in any room.",
+                height: "120 cm",
+                width: "85 cm"
+            },
+            {
+
+                id: 7,
+                title: "Abstract Harmony",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
+                oldPrice: "$350.00",
+                newPrice: "$280.00",
+                category: "art-smash",
+                description: "Modern abstract piece that creates harmony and balance in any room.",
+                height: "120 cm",
+                width: "85 cm"
+            },
+
+            {
+                id: 8,
+                title: "Abstract Harmony",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
+                oldPrice: "$350.00",
+                newPrice: "$280.00",
+                category: "art-smash",
+                description: "Modern abstract piece that creates harmony and balance in any room.",
+                height: "120 cm",
+                width: "85 cm"
+            },
+
+            {
+
+                id: 9,
+                title: "Abstract Harmony",
+                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
                 oldPrice: "$350.00",
                 newPrice: "$280.00",
                 category: "art-smash",
@@ -788,8 +834,8 @@
 
         // Render gallery
         function renderGallery() {
-            const filteredArtworks = currentFilter === 'all' 
-                ? artworks 
+            const filteredArtworks = currentFilter === 'all'
+                ? artworks
                 : artworks.filter(art => art.category === currentFilter);
 
             gallery.innerHTML = filteredArtworks.map(art => `
@@ -833,7 +879,7 @@
             gallery.addEventListener('click', (e) => {
                 const card = e.target.closest('.art-card');
                 const wishlistBtn = e.target.closest('.wishlist-btn');
-                
+
                 if (wishlistBtn) {
                     e.stopPropagation();
                     const artId = parseInt(wishlistBtn.dataset.id);
@@ -893,4 +939,5 @@
         init();
     </script>
 </body>
+
 </html>
