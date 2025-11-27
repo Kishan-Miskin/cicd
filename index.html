@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova - Collections of Art</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <title>Nova - Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --bg-black: #0e0e0f;
+            --bg-grey: #1a1a1d;
+            --bg-card: #141416;
+            --text-light: #dadada;
+            --text-muted: #8b8b8b;
+            --accent: #7b2cbf;
+            --accent-light: #a66bff;
+            --border: #222;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,40 +25,39 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: black;
-            color: white;
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-black);
+            color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Header */
+        /* HEADER */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--bg-grey);
             z-index: 1000;
             padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
         }
 
         .navbar {
+            max-width: 1400px;
+            margin: auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            font-family: 'Playfair Display', serif;
             font-weight: 700;
-            background: rgb(102, 0, 255);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent-light);
+            letter-spacing: 1px;
         }
 
         .nav-menu {
@@ -60,45 +68,95 @@
 
         .nav-menu.active {
             display: flex;
+            flex-direction: column;
             position: absolute;
             top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(26, 26, 26, 0.98);
-            flex-direction: column;
+            background: #141414;
             padding: 2rem;
-            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border);
         }
 
         .nav-menu a {
-            color: white;
+            color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
         .nav-menu a:hover {
-            color: rgb(102, 0, 255);
+            color: var(--accent-light);
         }
 
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--text-muted);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* MAIN */
+        .main {
+            margin-top: 80px;
+            padding: 2rem 1.5rem;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--accent-light);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            padding: 0 1rem;
+        }
+
+        /* SEARCH */
         .search-container {
-            display: none;
+            max-width: 600px;
+            margin: 0 auto 2rem;
             position: relative;
-            margin: 0 2rem;
-            flex: 1;
         }
 
         .search-bar {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            color: white;
-            font-size: 0.9rem;
+            padding: 1rem 1rem 1rem 3rem;
+            background: #0f0f11;
+            border: 1px solid #2a2a2d;
+            border-radius: 30px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            transition: all 0.3s;
         }
 
-        .search-bar::placeholder {
-            color: rgba(255, 255, 255, 0.6);
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 12px rgba(123, 44, 191, 0.3);
         }
 
         .search-icon {
@@ -106,317 +164,271 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-muted);
         }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .hamburger {
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: white;
-            transition: 0.3s;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
-        }
-
-        .cart-icon {
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .cart-icon:hover {
-            color: #22c55e;
-        }
-
-        /* Main Content */
-        .main {
-            margin-top: 80px;
-            padding: 2rem;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Mobile Search */
-        .mobile-search {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .mobile-search .search-bar {
-            width: 100%;
-            padding: 1rem 1rem 1rem 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .mobile-search .search-icon {
-            left: 1rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            flex-direction: column;
-            /* stack text & buttons vertically */
-            align-items: flex-start;
-            /* align everything to the right */
-            text-align: left;
-            /* align text inside elements */
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-        }
-
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 2rem;
-            text-align: left;
-            align-items: flex-start;
-        }
-
-     
-
-       
-        /* Category Filters */
+        /* CATEGORY FILTERS */
         .category-filters {
             display: flex;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
             overflow-x: auto;
             padding-bottom: 0.5rem;
         }
 
+        .category-filters::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .category-filters::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
         .category-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.5rem 1.5rem;
+            background: #131316;
+            color: var(--text-muted);
+            border: 1px solid #2a2a2d;
+            padding: 0.7rem 1.5rem;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s;
             white-space: nowrap;
             font-size: 0.9rem;
+            transition: all 0.3s;
         }
 
         .category-btn.active,
         .category-btn:hover {
-            background: rgb(102, 0, 255);
+            background: var(--accent);
             color: white;
-            border: none;
+            border-color: var(--accent-light);
+            transform: translateY(-2px);
         }
 
-        /* Gallery Grid */
+        /* GALLERY */
         .gallery {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
+            gap: 2rem;
+            padding: 1rem 0;
         }
 
         .art-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             overflow: hidden;
+            transition: all 0.4s ease;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
         .art-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(123, 44, 191, 0.4);
+            border-color: var(--accent);
         }
 
-        .art-image {
+        .art-image-container {
             position: relative;
             width: 100%;
-            height: 200px;
+            padding-top: 75%;
+            background: #1c1c20;
             overflow: hidden;
         }
 
-        .art-image img {
+        .art-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-
-        .art-card:hover .art-image img {
-            transform: scale(1.05);
+            object-fit: contain;
+            padding: 1rem;
+            background: #0a0a0c;
         }
 
         .wishlist-btn {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            background: rgba(20,20,22,0.95);
+            border: 1px solid #333;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
             cursor: pointer;
             transition: all 0.3s;
-            backdrop-filter: blur(10px);
+            z-index: 10;
         }
 
-        .wishlist-btn:hover,
+        .wishlist-btn:hover {
+            color: var(--accent-light);
+            transform: scale(1.1);
+            background: rgba(123, 44, 191, 0.2);
+        }
+
         .wishlist-btn.active {
-            color: #ef4444;
-            background: rgba(255, 255, 255, 0.9);
+            color: #ff2e63;
+            background: rgba(255, 46, 99, 0.2);
         }
 
         .card-content {
             padding: 1.5rem;
         }
 
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .price-container {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .card-header {
             margin-bottom: 1rem;
         }
 
-        .old-price {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: line-through;
-            font-size: 0.9rem;
-        }
-
-        .new-price {
-            color: white;
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--text-light);
             font-weight: 600;
-            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
         }
 
-        /* Modal */
+        .card-artist {
+            color: var(--accent-light);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .card-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .card-footer {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .view-more-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .view-more-btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(123, 44, 191, 0.4);
+        }
+
+        /* MODAL */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            inset: 0;
+            background: rgba(0,0,0,0.85);
             z-index: 2000;
-            backdrop-filter: blur(10px);
+            padding: 2rem;
+            overflow-y: auto;
         }
 
         .modal.active {
             display: flex;
-            align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            align-items: center;
         }
 
         .modal-content {
-            background: rgba(26, 26, 26, 0.95);
+            background: #111113;
+            border: 1px solid #333;
             border-radius: 20px;
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: slideUp 0.3s ease;
+            margin: auto;
         }
 
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
+        .modal-close {
             position: absolute;
             top: 1rem;
             right: 1rem;
-            z-index: 10;
-        }
-
-        .close-btn {
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            border-radius: 50%;
             width: 40px;
             height: 40px;
+            border-radius: 50%;
+            background: rgba(20,20,22,0.95);
+            border: 1px solid #333;
+            color: var(--text-muted);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             cursor: pointer;
-            backdrop-filter: blur(10px);
-            transition: background 0.3s;
+            z-index: 10;
+            transition: all 0.3s;
         }
 
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .modal-close:hover {
+            background: var(--accent);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-image-container {
+            width: 100%;
+            height: 400px;
+            background: #0a0a0c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
         }
 
         .modal-image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            border-radius: 20px 20px 0 0;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .modal-info {
@@ -424,520 +436,368 @@
         }
 
         .modal-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: var(--accent-light);
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-artist {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
         }
 
         .modal-description {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-price {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+            color: var(--text-muted);
+            line-height: 1.8;
             margin-bottom: 2rem;
+            font-size: 1rem;
         }
 
-        .modal-price .old-price {
-            font-size: 1.1rem;
+        .artwork-details {
+            background: #16161a;
+            border-radius: 12px;
+            border: 1px solid #2b2b2f;
+            padding: 1.5rem;
         }
 
-        .modal-price .new-price {
-            font-size: 1.5rem;
-        }
-
-        .size-info {
+        .detail-row {
             display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            color: rgba(255, 255, 255, 0.8);
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #222;
         }
 
-        .size-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .detail-row:last-child {
+            border-bottom: none;
         }
 
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .detail-row-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
         }
 
-        .scan-btn {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 0.75rem 1.5rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            flex: 1;
-            justify-content: center;
+        .detail-row-value {
+            color: var(--text-light);
+            font-weight: 500;
+            text-align: right;
         }
 
-        .scan-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .add-cart-btn {
-            background: rgb(102, 0, 255);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-weight: 600;
-            flex: 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .add-cart-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
-        }
-
-        /* Desktop Styles */
-        @media (min-width: 768px) {
-            .header {
-                padding: 1rem 3rem;
+        /* RESPONSIVE */
+        @media(min-width: 640px) {
+            .nav-menu {
+                display: flex;
+                flex-direction: row;
             }
 
             .hamburger {
                 display: none;
             }
 
-            .nav-menu {
-                display: flex;
-                position: static;
-                flex-direction: row;
-                background: none;
-                padding: 0;
-                width: auto;
-            }
-
-            .search-container {
-                display: block;
-                max-width: 400px;
-            }
-
-            .mobile-search {
-                display: none;
-            }
-
-            .main {
-                margin-top: 100px;
-                padding: 3rem;
-            }
-
-            .hero {
-                text-align: center;
-                padding: 4rem 0;
-            }
-
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-
             .gallery {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
             }
+        }
 
-            .art-image {
-                height: 250px;
+        @media(min-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .modal-content {
-                max-width: 800px;
-                display: flex;
                 flex-direction: row;
             }
 
-            .modal-image {
+            .modal-image-container {
                 width: 50%;
-                height: 500px;
-                border-radius: 20px 0 0 20px;
+                height: auto;
+                min-height: 600px;
             }
 
             .modal-info {
                 width: 50%;
-                padding: 3rem;
-            }
-
-            .modal-actions {
-                flex-wrap: nowrap;
             }
         }
 
-        @media (min-width: 1024px) {
+        @media(min-width: 1280px) {
             .gallery {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2.5rem;
+                grid-template-columns: repeat(4, 1fr);
             }
-
-            .art-image {
-                height: 280px;
-            }
-        }
-
-        /* Scrollbar Styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 2px;
-            
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgb(115, 22, 255);
-            border-radius: 4px;
-            
-
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(34, 197, 94, 0.8);
         }
     </style>
 </head>
-
 <body>
+
     <header class="header">
         <nav class="navbar">
-            <div class="logo">Nova</div>
-
+            <div class="logo">Nova Arts</div>
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#home">Explore</a></li>
+                <li><a href="#gallery">Collections</a></li>
                 <li><a href="#artists">Artists</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about">About</a></li>
             </ul>
-
-            <div class="search-container">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" class="search-bar" placeholder="Find your Art">
-            </div>
-
-            <div class="nav-right">
-                <i class="fas fa-shopping-cart cart-icon"></i>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
             </div>
         </nav>
     </header>
 
     <main class="main">
-        <div class="mobile-search">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-bar" placeholder="Find your Art">
-        </div>
-
         <section class="hero">
-            <h1>Canvas of Exclusivity</h1>
-            <p>Step into a world where colors speak, forms inspire, and every stroke transforms your space into a living masterpiece. Each artwork is a journey—an echo of imagination, a whisper of emotion, turning walls into stories, and rooms into realms of wonder.</p>
-            </button>
+            <h1>Discover Art History</h1>
+            <p>Journey through centuries of artistic brilliance. Explore masterpieces, iconic artists, and the evolution of art styles across eras.</p>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search artworks, artists, or periods">
+            </div>
         </section>
 
         <div class="category-filters">
-            <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="nature">Nature</button>
-            <button class="category-btn" data-category="nfts">NFTs</button>
-            <button class="category-btn" data-category="art-smash">Art Smash</button>
+            <button class="category-btn active" data-category="all">All Artworks</button>
+            <button class="category-btn" data-category="renaissance">Renaissance</button>
+            <button class="category-btn" data-category="baroque">Baroque</button>
+            <button class="category-btn" data-category="modern">Modern</button>
         </div>
 
-        <div class="gallery" id="gallery">
-            <!-- Art cards will be dynamically generated here -->
-        </div>
+        <div id="gallery" class="gallery"></div>
     </main>
 
-    <!-- Modal -->
     <div class="modal" id="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <button class="close-btn">&times;</button>
+            <div class="modal-close" id="modalClose">
+                <i class="fas fa-times"></i>
             </div>
-            <img class="modal-image" id="modal-image" src="" alt="">
+            <div class="modal-image-container">
+                <img class="modal-image" id="modalImage" alt="Artwork">
+            </div>
             <div class="modal-info">
-                <h2 class="modal-title" id="modal-title"></h2>
-                <p class="modal-description" id="modal-description"></p>
-                <div class="modal-price">
-                    <span class="old-price" id="modal-old-price"></span>
-                    <span class="new-price" id="modal-new-price"></span>
-                </div>
-                <div class="size-info">
-                    <div class="size-item">
-                        <span>Height</span>
-                        <i class="fas fa-arrow-right"></i>
-                        <span id="modal-height"></span>
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <p id="modalArtist" class="modal-artist"></p>
+                <p id="modalDescription" class="modal-description"></p>
+                <div class="artwork-details">
+                    <div class="detail-row">
+                        <span class="detail-row-label"><i class="fas fa-calendar"></i> Created</span>
+                        <span id="modalDate" class="detail-row-value"></span>
                     </div>
-                    <div class="size-item">
-                        <span>Width</span>
-                        <i class="fas fa-arrow-right"></i>
-                        <span id="modal-width"></span>
+                    <div class="detail-row">
+                        <span class="detail-row-label"><i class="fas fa-palette"></i> Medium</span>
+                        <span id="modalMedium" class="detail-row-value"></span>
                     </div>
-                </div>
-                <div class="modal-actions">
-                    <button class="scan-btn">
-                        <i class="fas fa-qrcode"></i>
-                        Scan My Place
-                    </button>
-                    <button class="add-cart-btn">
-                        Add to Cart
-                    </button>
+                    <div class="detail-row">
+                        <span class="detail-row-label"><i class="fas fa-ruler-combined"></i> Dimensions</span>
+                        <span id="modalDimensions" class="detail-row-value"></span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-row-label"><i class="fas fa-map-marker-alt"></i> Location</span>
+                        <span id="modalLocation" class="detail-row-value"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        // Sample art data
-        const artworks = [
-            {
-                id: 1,
-                title: "The School of Athens",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7l8eWLDhE46jpomew5AzPWE9TFnfr1HiYQ&s",
-                oldPrice: "$250.00",
-                newPrice: "$150.00",
-                category: "nature",
-                description: "A home can never look complete without some vintage art prints adorning your wall.",
-                height: "100 cm",
-                width: "70 cm"
-            },
-            {
-                id: 2,
-                title: "Sylvia Christiansen",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg/960px-The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg",
-                oldPrice: "$130.00",
-                newPrice: "$100.00",
-                category: "art-smash",
-                description: "Contemporary portrait art that captures the essence of modern expression.",
-                height: "80 cm",
-                width: "60 cm"
-            },
-            {
-                id: 3,
-                title: "Christopher Seahan",
-                image: "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/330px-PicassoGuernica.jpg",
-                oldPrice: "$220.00",
-                newPrice: "$170.00",
-                category: "nature",
-                description: "Classic portrait photography with timeless appeal and sophisticated composition.",
-                height: "90 cm",
-                width: "65 cm"
-            },
-            {
-                id: 4,
-                title: "Flower Poetry",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/330px-1665_Girl_with_a_Pearl_Earring.jpg",
-                oldPrice: "$300.00",
-                newPrice: "$230.00",
-                category: "nature",
-                description: "Beautiful floral arrangement that brings nature's poetry into your living space.",
-                height: "75 cm",
-                width: "55 cm"
-            },
-            {
-                id: 5,
-                title: "Digital Dreams",
-                image: "https://cdn.britannica.com/24/189624-050-F3C5BAA9/Mona-Lisa-oil-wood-panel-Leonardo-da.jpg?w=400&h=300&c=crop",
-                oldPrice: "$180.00",
-                newPrice: "$120.00",
-                category: "nfts",
-                description: "Cutting-edge digital art that represents the future of creative expression.",
-                height: "Digital",
-                width: "Format"
-            },
-            {
-                id: 6,
-                title: "Abstract Harmony",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
-                oldPrice: "$350.00",
-                newPrice: "$280.00",
-                category: "art-smash",
-                description: "Modern abstract piece that creates harmony and balance in any room.",
-                height: "120 cm",
-                width: "85 cm"
-            },
-            {
+<script>
+const artworks = [
+    {
+        id: 1,
+        title: "The School of Athens",
+        artist: "Raphael",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7l8eWLDhE46jpomew5AzPWE9TFnfr1HiYQ&s",
+        category: "renaissance",
+        description: "A fresco showcasing the greatest philosophers and scientists of classical antiquity, including Plato, Aristotle, and Pythagoras in an idealized architectural setting.",
+        date: "1509–1511",
+        medium: "Fresco",
+        dimensions: "500 × 770 cm",
+        location: "Vatican Museums, Vatican City"
+    },
+    {
+        id: 2,
+        title: "The Last Supper",
+        artist: "Leonardo da Vinci",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg/960px-The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg",
+        category: "renaissance",
+        description: "Depicts Jesus with his apostles during the final meal, capturing raw human emotions and reactions to the announcement of betrayal.",
+        date: "1495–1498",
+        medium: "Tempera on Gesso",
+        dimensions: "460 × 880 cm",
+        location: "Santa Maria delle Grazie, Milan"
+    },
+    {
+        id: 3,
+        title: "Guernica",
+        artist: "Pablo Picasso",
+        image: "https://upload.wikimedia.org/wikipedia/en/thumb/7/74/PicassoGuernica.jpg/330px-PicassoGuernica.jpg",
+        category: "modern",
+        description: "A powerful cubist anti-war masterpiece symbolizing the suffering and chaos caused by the bombing of Guernica during the Spanish Civil War.",
+        date: "1937",
+        medium: "Oil on Canvas",
+        dimensions: "349 × 776 cm",
+        location: "Museo Reina Sofía, Madrid"
+    },
+    {
+        id: 4,
+        title: "Girl with a Pearl Earring",
+        artist: "Johannes Vermeer",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/1665_Girl_with_a_Pearl_Earring.jpg/330px-1665_Girl_with_a_Pearl_Earring.jpg",
+        category: "baroque",
+        description: "Known as the 'Mona Lisa of the North', this mysterious portrait features an unnamed girl with an exotic turban and luminous pearl earring.",
+        date: "1665",
+        medium: "Oil on Canvas",
+        dimensions: "44.5 × 39 cm",
+        location: "Mauritshuis, The Hague"
+    },
+    {
+        id: 5,
+        title: "Mona Lisa",
+        artist: "Leonardo da Vinci",
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/330px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
+        category: "renaissance",
+        description: "The world's most famous painting featuring an enigmatic smile and innovative sfumato technique, creating an eternal mystery about the subject's expression.",
+        date: "1503–1519",
+        medium: "Oil on Poplar Panel",
+        dimensions: "77 × 53 cm",
+        location: "Louvre Museum, Paris"
+    },
+    {
+        id: 6,
+        title: "The Starry Night",
+        artist: "Vincent van Gogh",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
+        category: "modern",
+        description: "A swirling and emotional view of the night sky painted from memory, featuring bold brushwork and vibrant colors that convey van Gogh's turbulent emotions.",
+        date: "1889",
+        medium: "Oil on Canvas",
+        dimensions: "73.7 × 92.1 cm",
+        location: "Museum of Modern Art, New York"
+    }
+];
 
-                id: 7,
-                title: "Abstract Harmony",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
-                oldPrice: "$350.00",
-                newPrice: "$280.00",
-                category: "art-smash",
-                description: "Modern abstract piece that creates harmony and balance in any room.",
-                height: "120 cm",
-                width: "85 cm"
-            },
+let currentFilter = "all";
+let wishlist = new Set();
+let searchQuery = "";
 
-            {
-                id: 8,
-                title: "Abstract Harmony",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
-                oldPrice: "$350.00",
-                newPrice: "$280.00",
-                category: "art-smash",
-                description: "Modern abstract piece that creates harmony and balance in any room.",
-                height: "120 cm",
-                width: "85 cm"
-            },
+const gallery = document.getElementById("gallery");
+const modal = document.getElementById("modal");
+const searchBar = document.getElementById("searchBar");
 
-            {
-
-                id: 9,
-                title: "Abstract Harmony",
-                image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1XT0nvPpneNeOLiCpNBaAIN5b4Wr6X1E8xw&s",
-                oldPrice: "$350.00",
-                newPrice: "$280.00",
-                category: "art-smash",
-                description: "Modern abstract piece that creates harmony and balance in any room.",
-                height: "120 cm",
-                width: "85 cm"
-            }
-        ];
-
-        let currentFilter = 'all';
-        let wishlistedItems = new Set();
-
-        // DOM Elements
-        const gallery = document.getElementById('gallery');
-        const modal = document.getElementById('modal');
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        const categoryBtns = document.querySelectorAll('.category-btn');
-        const closeBtn = document.querySelector('.close-btn');
-
-        // Initialize
-        function init() {
-            renderGallery();
-            setupEventListeners();
-        }
-
-        // Render gallery
-        function renderGallery() {
-            const filteredArtworks = currentFilter === 'all'
-                ? artworks
-                : artworks.filter(art => art.category === currentFilter);
-
-            gallery.innerHTML = filteredArtworks.map(art => `
-                <div class="art-card" data-id="${art.id}">
-                    <div class="art-image">
-                        <img src="${art.image}" alt="${art.title}">
-                        <button class="wishlist-btn ${wishlistedItems.has(art.id) ? 'active' : ''}" data-id="${art.id}">
-                            <i class="fas fa-heart"></i>
-                        </button>
+function renderGallery() {
+    let filtered = artworks;
+    
+    if (currentFilter !== "all") {
+        filtered = filtered.filter(a => a.category === currentFilter);
+    }
+    
+    if (searchQuery) {
+        filtered = filtered.filter(a => 
+            a.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            a.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            a.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }
+    
+    gallery.innerHTML = filtered.map(a => `
+        <div class="art-card" data-id="${a.id}">
+            <div class="art-image-container">
+                <img src="${a.image}" alt="${a.title}" class="art-image">
+                <button class="wishlist-btn ${wishlist.has(a.id) ? "active" : ""}" data-id="${a.id}" onclick="toggleWishlist(event, ${a.id})">
+                    <i class="fas fa-heart"></i>
+                </button>
+            </div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h3 class="card-title">${a.title}</h3>
+                    <p class="card-artist">by ${a.artist}</p>
+                </div>
+                <p class="card-description">${a.description}</p>
+                <div class="card-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Period</span>
+                        <span class="detail-value">${a.date}</span>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${art.title}</h3>
-                        <div class="price-container">
-                            <span class="old-price">${art.oldPrice}</span>
-                            <span class="new-price">${art.newPrice}</span>
-                        </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Medium</span>
+                        <span class="detail-value">${a.medium.split(' ')[0]}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Size</span>
+                        <span class="detail-value">${a.dimensions.split(' ')[0]}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-value">${a.location.split(',')[0]}</span>
                     </div>
                 </div>
-            `).join('');
-        }
+            </div>
+            <div class="card-footer">
+                <button class="view-more-btn" onclick="openModal(${a.id})">
+                    <i class="fas fa-info-circle"></i> View Details
+                </button>
+            </div>
+        </div>
+    `).join("");
+}
 
-        // Setup event listeners
-        function setupEventListeners() {
-            // Hamburger menu
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
-            });
+function toggleWishlist(event, id) {
+    event.stopPropagation();
+    wishlist.has(id) ? wishlist.delete(id) : wishlist.add(id);
+    renderGallery();
+}
 
-            // Category filters
-            categoryBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    categoryBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentFilter = btn.dataset.category;
-                    renderGallery();
-                });
-            });
+function openModal(id) {
+    const a = artworks.find(x => x.id === id);
+    document.getElementById("modalImage").src = a.image;
+    document.getElementById("modalTitle").textContent = a.title;
+    document.getElementById("modalArtist").textContent = `by ${a.artist}`;
+    document.getElementById("modalDescription").textContent = a.description;
+    document.getElementById("modalDate").textContent = a.date;
+    document.getElementById("modalMedium").textContent = a.medium;
+    document.getElementById("modalDimensions").textContent = a.dimensions;
+    document.getElementById("modalLocation").textContent = a.location;
+    modal.classList.add("active");
+    document.body.style.overflow = 'hidden';
+}
 
-            // Gallery clicks
-            gallery.addEventListener('click', (e) => {
-                const card = e.target.closest('.art-card');
-                const wishlistBtn = e.target.closest('.wishlist-btn');
+function closeModal() {
+    modal.classList.remove("active");
+    document.body.style.overflow = 'auto';
+}
 
-                if (wishlistBtn) {
-                    e.stopPropagation();
-                    const artId = parseInt(wishlistBtn.dataset.id);
-                    toggleWishlist(artId);
-                } else if (card) {
-                    const artId = parseInt(card.dataset.id);
-                    openModal(artId);
-                }
-            });
+// Event Listeners
+document.querySelector(".hamburger").onclick = () => {
+    document.querySelector(".nav-menu").classList.toggle("active");
+};
 
-            // Modal close
-            closeBtn.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
+document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentFilter = btn.dataset.category;
+        renderGallery();
+    };
+});
 
-            // ESC key to close modal
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeModal();
-            });
-        }
+searchBar.oninput = (e) => {
+    searchQuery = e.target.value;
+    renderGallery();
+};
 
-        // Toggle wishlist
-        function toggleWishlist(artId) {
-            if (wishlistedItems.has(artId)) {
-                wishlistedItems.delete(artId);
-            } else {
-                wishlistedItems.add(artId);
-            }
-            renderGallery();
-        }
+modal.onclick = (e) => {
+    if (e.target === modal) closeModal();
+};
 
-        // Open modal
-        function openModal(artId) {
-            const artwork = artworks.find(art => art.id === artId);
-            if (!artwork) return;
+document.getElementById("modalClose").onclick = closeModal;
 
-            document.getElementById('modal-image').src = artwork.image;
-            document.getElementById('modal-title').textContent = artwork.title;
-            document.getElementById('modal-description').textContent = artwork.description;
-            document.getElementById('modal-old-price').textContent = artwork.oldPrice;
-            document.getElementById('modal-new-price').textContent = artwork.newPrice;
-            document.getElementById('modal-height').textContent = artwork.height;
-            document.getElementById('modal-width').textContent = artwork.width;
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+    }
+});
 
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+renderGallery();
+</script>
 
-        // Close modal
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Initialize app
-        init();
-    </script>
 </body>
-
 </html>
