@@ -39,20 +39,5 @@ CI/CD ensures faster development cycles, fewer bugs, and reliable deployments by
 | Category        | Tools Used |
 |----------------|-----------|
 | Version Control | Git & GitHub |
-| CI/CD Engine    | GitHub Actions / Jenkins |
-| Containerization | Docker |
-| Cloud (Optional) | AWS |
-| Scripting       | Bash / YAML |
-
----
-
-## 🔄 Pipeline Workflow
-
-```mermaid
-graph TD;
-
-A[Code Push] --> B[Build Stage]
-B --> C[Test Stage]
-C --> D[Lint & Quality Checks]
-D --> E[Docker Build]
-E --> F[Deploy to Server / Cloud]
+| CI/CD Engine    | GitHub Actions 
+| Website | HTML/CSS/JS |
